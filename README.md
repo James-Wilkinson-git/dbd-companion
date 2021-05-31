@@ -4,7 +4,7 @@ This is a pet project to learn React, React Hooks, and Graph QL, follow along on
 
 ## App Planning
 
-Planning your app is crucial checkout the visuals and data scturcters we created before making the app on (Miro)[https://miro.com/app/board/o9J_lB40U1Q=/]
+Planning your app is crucial checkout the visuals and data scturcters we created before making the app on [Miro](https://miro.com/app/board/o9J_lB40U1Q=/)
 
 ## Resources
 
