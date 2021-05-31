@@ -1,15 +1,17 @@
 //JS Import
-import React from "react";
+import React, { FC } from "react";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { Perk } from "../components/Perk";
+import { BackButton } from "../components/BackButton";
 
-export function PerksList() {
+export const PerksList: FC = () => {
   return (
     <Container>
       <Row>
         <Col>
+          <BackButton />
           <h2>Perks List</h2>
           <Perk />
           <Perk />
@@ -20,4 +22,4 @@ export function PerksList() {
       </Row>
     </Container>
   );
-}
+};
