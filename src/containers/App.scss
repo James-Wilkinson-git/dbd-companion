@@ -1,0 +1,58 @@
+@import "~bootstrap/scss/bootstrap";
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #000;
+  background-image: url(../assets/grunge-bg.jpg);
+  color: #fff;
+}
+.header {
+  padding-top: 15px;
+  width: 100%;
+  img {
+    float: left;
+  }
+  a {
+    & h1 {
+      font-family: "Roboto", sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: #fff;
+      font-size: 32px;
+    }
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+@media only screen and (min-width: 415px) {
+  .header a h1 {
+    padding-top: 26px;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .header a h1 {
+    padding-top: 44px;
+  }
+}
+.perkBtn {
+  border: 5px solid rgba(255, 255, 255, 0.25);
+  text-align: center;
+  display: block;
+  margin-bottom: 15px;
+  font-weight: 300;
+  img {
+    max-width: 128px;
+    height: auto;
+  }
+  &:hover {
+    border: 5px solid rgba(255, 255, 255, 1);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  a {
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+}
