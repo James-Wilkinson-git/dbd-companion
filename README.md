@@ -1,4 +1,20 @@
-# Getting Started with Create React App
+# Dead By Daylight Companion App
+
+This is a pet project to learn React, React Hooks, and Graph QL, follow along on YouTube and Twitch!
+
+## App Planning
+
+Planning your app is crucial checkout the visuals and data scturcters we created before making the app on [Miro](https://miro.com/app/board/o9J_lB40U1Q=/)
+
+## Resources
+
+* https://deadbydaylight.fandom.com/wiki/Perks
+* https://react-bootstrap.github.io/layout/grid/
+* https://create-react-app.dev/docs/adding-typescript/
+* https://reactrouter.com/web/guides/quick-start
+* https://www.pluralsight.com/guides/react-router-typescript
+
+# Create React App Boiler Plate
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
