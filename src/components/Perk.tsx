@@ -1,6 +1,5 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
-import AceInTheHole from "../assets/perks/iconPerks_aceInTheHole.png";
 
 export function Perk() {
   return (
@@ -10,7 +9,7 @@ export function Perk() {
           width={128}
           height={128}
           className="mr-3 float-left"
-          src={AceInTheHole}
+          src="/images/perks/iconPerks_aceInTheHole.png"
           alt="Ace In The Hole"
         />
         <h5>Ace in the Hole</h5>

@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Home } from "./Home";
 import { PerksList } from "./PerksList";
-
+import { Stats } from "./Stats";
 //Styles
 import "./App.scss";
 
@@ -22,6 +22,9 @@ export const App: FC = () => {
         </Route>
         <Route path="/research">
           <p>Research Coming Soon</p>
+        </Route>
+        <Route path="/stats">
+          <Stats />
         </Route>
         <Route path="/">
           <Home />

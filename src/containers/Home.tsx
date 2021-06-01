@@ -9,6 +9,7 @@ import researchIcon from "../assets/research-icon.png";
 import rouletteIcon from "../assets/roulette-icon.png";
 import tutorialIcon from "../assets/tutorial-icon.png";
 import dbdLogo from "../assets/dbd-logo.png";
+import statsIcon from "../assets/stats-icon.png";
 export const Home: FC = () => {
   return (
     <Container>
@@ -50,6 +51,14 @@ export const Home: FC = () => {
             <Link to="/research">
               <img src={researchIcon} alt="Research" />
               <p>Research</p>
+            </Link>
+          </div>
+        </Col>
+        <Col>
+          <div className="perkBtn">
+            <Link to="/stats">
+              <img src={statsIcon} alt="Stats" />
+              <p>Your Stats</p>
             </Link>
           </div>
         </Col>
