@@ -4,7 +4,7 @@
     "/**": "index.html"
   },
   "proxies": {
-    "/v0002/": {
+    "/v0002": {
       "origin": "http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/"
     }
   }
