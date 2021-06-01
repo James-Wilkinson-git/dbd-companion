@@ -41,7 +41,6 @@ export const Stats: FC = () => {
     );
     const data = await response.json();
     setDbdStats(await data);
-    console.log(dbdStats?.playerstats.stats);
   };
 
   return (

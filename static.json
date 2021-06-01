@@ -1,4 +1,8 @@
 {
+  "root": "build/",
+  "routes": {
+    "/**": "index.html"
+  },
   "proxies": {
     "/steam/": {
       "origin": "http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/"
