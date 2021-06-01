@@ -37,14 +37,7 @@ export const Stats: FC = () => {
 
   const fetchStats = async (steamId: string) => {
     const response = await fetch(
-      `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=381210&key=60CC7208B3EA2ABFA86557BBB788C2B8&steamid=${steamId}`,
-      {
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "www.dbdcompanion.com",
-        },
-      }
+      `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=381210&key=60CC7208B3EA2ABFA86557BBB788C2B8&steamid=${steamId}`
     );
     const data = await response.json();
     setDbdStats(await data);
