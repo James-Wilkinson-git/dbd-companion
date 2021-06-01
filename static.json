@@ -1,0 +1,7 @@
+{
+  "proxies": {
+    "/steam/": {
+      "origin": "http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/"
+    }
+  }
+}
