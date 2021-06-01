@@ -2,10 +2,9 @@ const { createProxyMiddleware } = require("http-proxy-middleware");
 
 module.exports = function (app) {
   app.use(
-    "/steam",
+    "/v0002",
     createProxyMiddleware({
-      target:
-        "http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002",
+      target: "http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame",
       changeOrigin: true,
     })
   );
