@@ -5,23 +5,45 @@ import Row from "react-bootstrap/Row";
 import SteamInstructions from "../assets/steam-instructions.jpg";
 import { Button, Form } from "react-bootstrap";
 
+export interface SteamApi {
+  playerstats: Playerstats;
+}
+export interface Playerstats {
+  steamID: string;
+  gameName: string;
+  stats?: StatsEntity[] | null;
+  achievements?: AchievementsEntity[] | null;
+}
+export interface StatsEntity {
+  name: string;
+  value: number;
+}
+export interface AchievementsEntity {
+  name: string;
+  achieved: number;
+}
+
 export const Stats: FC = () => {
   const initialValues = { steamId: "" };
   const [values, setValues] = useState(initialValues);
+  const [dbdStats, setDbdStats] = useState<SteamApi>();
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValues({ ...values, [event.target.name]: event.target.value });
   };
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    getStats(values.steamId);
+    fetchStats(values.steamId);
   };
-  const getStats = async (steamId: string) => {
-    const getReq = await fetch(
+
+  const fetchStats = async (steamId: string) => {
+    const response = await fetch(
       `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=381210&key=3CB4E53F9792C36F39D9131612BD780F&steamid=${steamId}`
     );
-    const dbdStats = await getReq.json();
-    console.log(dbdStats);
+    const data = await response.json();
+    setDbdStats(await data);
+    console.log(dbdStats?.playerstats.stats);
   };
+
   return (
     <Container>
       <Row>
@@ -59,6 +81,34 @@ export const Stats: FC = () => {
           </Button>
         </Form>
       </Row>
+      {dbdStats && (
+        <Row>
+          <Col>
+            <ul>
+              {" "}
+              Achievements:
+              {dbdStats.playerstats.achievements?.map((achievements, i) => {
+                return (
+                  <li key={i}>
+                    {achievements.name}: {achievements.achieved}
+                  </li>
+                );
+              })}
+            </ul>
+            <ul>
+              {" "}
+              Stats:
+              {dbdStats.playerstats.stats?.map((stat, i) => {
+                return (
+                  <li key={i}>
+                    {stat.name}: {stat.value}
+                  </li>
+                );
+              })}
+            </ul>
+          </Col>
+        </Row>
+      )}
     </Container>
   );
 };
