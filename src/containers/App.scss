@@ -60,3 +60,20 @@ body {
   background: none;
   border-bottom: 1px solid #565656;
 }
+#chevron-arrow-left {
+  display: inline-block;
+  border-right: 4px solid red;
+  border-bottom: 4px solid red;
+  width: 10px;
+  height: 10px;
+  transform: rotate(-225deg);
+  margin-right: 15px;
+}
+#chevron-arrow-right {
+  display: inline-block;
+  border-right: 4px solid red;
+  border-bottom: 4px solid red;
+  width: 10px;
+  height: 10px;
+  transform: rotate(-45deg);
+}

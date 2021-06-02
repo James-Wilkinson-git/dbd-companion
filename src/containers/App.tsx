@@ -1,11 +1,13 @@
 //JS Import
 import React, { FC } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Home } from "./Home";
-import { PerksList } from "./PerksList";
-import { Stats } from "./Stats";
+import { Home } from "./Home/Home";
+import { PerksList } from "./Perks/PerksList";
+import { Stats } from "./Stats/Stats";
 //Styles
 import "./App.scss";
+import Roulette from "./Roulette/Roulette";
+import Tutorials from "./Tutorials/Tutorials";
 
 export const App: FC = () => {
   return (
@@ -15,13 +17,10 @@ export const App: FC = () => {
           <PerksList />
         </Route>
         <Route path="/roulette">
-          <p>Roulette Coming Soon</p>
+          <Roulette />
         </Route>
         <Route path="/tutorials">
-          <p>Tuts Coming Soon</p>
-        </Route>
-        <Route path="/research">
-          <p>Research Coming Soon</p>
+          <Tutorials />
         </Route>
         <Route path="/stats">
           <Stats />
