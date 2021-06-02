@@ -1,6 +1,7 @@
 .backBtn {
-  margin: 15px 0;
+  margin: 15px 10px;
   display: block;
+  box-sizing: border-box;
   a {
     color: #fff;
     font-size: 16px;
@@ -8,10 +9,12 @@
     border: 2px solid rgba(255, 255, 255, 0.25);
     padding: 10px 25px 10px 15px;
     display: block;
+    box-sizing: border-box;
     &:hover {
       border: 2px solid rgba(255, 255, 255, 1);
       color: #fff;
       text-decoration: none;
+      box-sizing: border-box;
     }
   }
 }
