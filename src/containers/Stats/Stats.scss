@@ -1,0 +1,25 @@
+form {
+  padding: 15px;
+}
+label {
+  margin-right: 15px;
+  display: flex;
+}
+input {
+  border: 1px solid #ccc;
+  color: #fff;
+  background: none;
+  padding: 10px;
+  display: flex;
+}
+button {
+  background: none;
+  border: 1px solid #ccc;
+  color: #fff;
+  font-weight: 900;
+  padding: 10px;
+}
+.scrollContainer {
+  width: 100%;
+  overflow-x: scroll;
+}
