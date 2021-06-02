@@ -1,0 +1,23 @@
+.perkThumb {
+  display: inline-block;
+  text-align: center;
+  padding: 30px;
+}
+.perkIcon {
+  width: 100px;
+  height: 100px;
+  background-color: rgba(255, 116, 23, 0.5);
+  border: 8px solid rgba(0, 0, 0, 0.5);
+  display: inline-block;
+  margin: 5px;
+  box-sizing: border-box;
+  transform: rotate(45deg);
+  text-align: center;
+  img {
+    width: 128px;
+    margin-top: -25px;
+    margin-left: -25px;
+    height: auto;
+    transform: rotate(-45deg);
+  }
+}
