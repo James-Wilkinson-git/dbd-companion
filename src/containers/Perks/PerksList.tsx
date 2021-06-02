@@ -251,9 +251,11 @@ export const PerksList: FC = () => {
       <Row>
         <Col>
           <h2>Perks List</h2>
-          {perks.map((perk) => {
-            return <Perk thumb={perk} />;
-          })}
+          <div className="perksContainer">
+            {perks.map((perk) => {
+              return <Perk thumb={perk} />;
+            })}
+          </div>
         </Col>
       </Row>
     </Container>

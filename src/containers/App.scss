@@ -77,3 +77,9 @@ body {
   height: 10px;
   transform: rotate(-45deg);
 }
+.modal-content {
+  background-color: rgba(0, 0, 0, 0.85);
+}
+.close {
+  color: red;
+}
