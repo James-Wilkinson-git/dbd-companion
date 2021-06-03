@@ -9,6 +9,7 @@ import rouletteIcon from "../../assets/roulette-icon.png";
 import tutorialIcon from "../../assets/tutorial-icon.png";
 import dbdLogo from "../../assets/dbd-logo.png";
 import statsIcon from "../../assets/stats-icon.png";
+import statusIcon from "../../assets/status_effects.png";
 export const Home: FC = () => {
   return (
     <Container>
@@ -26,6 +27,14 @@ export const Home: FC = () => {
             <Link to="/perks">
               <img src={perksIcon} alt="Perks List" />
               <p>Perks List</p>
+            </Link>
+          </div>
+        </Col>
+        <Col>
+          <div className="perkBtn">
+            <Link to="/status">
+              <img src={statusIcon} alt="Status Effects List" />
+              <p>Status Effects List</p>
             </Link>
           </div>
         </Col>

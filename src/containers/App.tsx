@@ -8,6 +8,7 @@ import { Stats } from "./Stats/Stats";
 import "./App.scss";
 import Roulette from "./Roulette/Roulette";
 import Tutorials from "./Tutorials/Tutorials";
+import { StatusEffects } from "./Status/StatusEffects";
 
 export const App: FC = () => {
   return (
@@ -15,6 +16,9 @@ export const App: FC = () => {
       <Switch>
         <Route path="/perks">
           <PerksList />
+        </Route>
+        <Route path="/status">
+          <StatusEffects />
         </Route>
         <Route path="/roulette">
           <Roulette />
