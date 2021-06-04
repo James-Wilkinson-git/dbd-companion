@@ -3,9 +3,9 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import SteamInstructions from "../../assets/steam-instructions.jpg";
-import { ListGroup } from "react-bootstrap";
 import { BackButton } from "../../components/BackBtn/BackButton";
 import "./Stats.scss";
+import { StatsList } from "../../components/StatsList/StatsList";
 export interface SteamApi {
   playerstats: Playerstats;
 }
@@ -22,6 +22,10 @@ export interface StatsEntity {
 export interface AchievementsEntity {
   name: string;
   achieved: number;
+}
+
+export interface StatsLookup {
+  [key: string]: String;
 }
 
 // const plaerstats = {
@@ -154,7 +158,7 @@ export const Stats: FC = () => {
   const [unknownStats, setUnknownStats] = useState<StatsEntity[]>();
 
   //Dictionaries
-  const killerStatLookup: any = {
+  const killerStatLookup: StatsLookup = {
     DBD_KillerSkulls: "Killer rank (pips)",
     DBD_KilledCampers:
       "Survivors killed (mori, devour hope, rancor, pig traps...)",
@@ -208,14 +212,14 @@ export const Stats: FC = () => {
     DBD_Chapter14_Slasher_Stat2:
       "Downed survivors while using blood fury (oni)",
   };
-  const genericStatLookup: any = {
+  const genericStatLookup: StatsLookup = {
     DBD_BloodwebPoints: "Bloodpoints earned",
     DBD_MaxBloodwebPointsOneCategory:
       "Total amount of points earned after maxing one category",
     DBD_UnlockRanking: "Ranked up",
     DBD_Event1_Stat3: "Mystery boxes opened in bloodwebs",
   };
-  const survivorStatLookup: any = {
+  const survivorStatLookup: StatsLookup = {
     DBD_CamperSkulls: "Survivor rank (pips)",
     DBD_GeneratorPct_float: "Equivalent generators repaired",
     DBD_HealPct_float: "Equivalent survivors healed",
@@ -288,6 +292,36 @@ export const Stats: FC = () => {
     event.preventDefault();
     fetchStats(values.steamId);
   };
+  const parseStatsData = (data: SteamApi) => {
+    let killerStatsMap: StatsEntity[] = [],
+      survivorStatsMap: StatsEntity[] = [],
+      genericStatsMap: StatsEntity[] = [],
+      unknownStatsMap: StatsEntity[] = [];
+
+    data?.playerstats?.stats?.map((stat: StatsEntity) => {
+      switch (true) {
+        case killerStatLookup.hasOwnProperty(stat.name):
+          killerStatsMap.push(stat);
+          break;
+        case survivorStatLookup.hasOwnProperty(stat.name):
+          survivorStatsMap.push(stat);
+          break;
+        case genericStatLookup.hasOwnProperty(stat.name):
+          genericStatsMap.push(stat);
+          break;
+        default:
+          unknownStatsMap.push(stat);
+          break;
+      }
+      return true;
+    });
+
+    setKillerStats(killerStatsMap);
+    setSurvivorStats(survivorStatsMap);
+    setGenericStats(genericStatsMap);
+    setUnknownStats(unknownStatsMap);
+    setDbdStats(data);
+  };
 
   const fetchStats = async (steamId: string) => {
     const response = await fetch(
@@ -297,36 +331,8 @@ export const Stats: FC = () => {
       const message = `An error has occurred: ${response.status}`;
       throw new Error(message);
     }
-    const data = await response.json();
-    const killerStatsMap = await data.playerstats.stats.filter(
-      (item: StatsEntity) => {
-        return killerStatLookup[item.name];
-      }
-    );
-    const survivorStatsMap = await data.playerstats.stats.filter(
-      (item: StatsEntity) => {
-        return survivorStatLookup[item.name];
-      }
-    );
-    const genericStatsMap = await data.playerstats.stats.filter(
-      (item: StatsEntity) => {
-        return genericStatLookup[item.name];
-      }
-    );
-    const unknownStatsMap = await data.playerstats.stats.filter(
-      (item: StatsEntity) => {
-        return !(
-          genericStatLookup[item.name] ||
-          survivorStatLookup[item.name] ||
-          killerStatLookup[item.name]
-        );
-      }
-    );
-    setKillerStats(await killerStatsMap);
-    setSurvivorStats(await survivorStatsMap);
-    setGenericStats(await genericStatsMap);
-    setUnknownStats(await unknownStatsMap);
-    setDbdStats(await data);
+    const data: SteamApi = await response.json();
+    parseStatsData(data);
   };
 
   return (
@@ -375,63 +381,42 @@ export const Stats: FC = () => {
           <Row>
             <Col>
               <h4>Killer Stats</h4>
-              <ListGroup variant="flush">
-                {killerStats?.map((stat, i) => {
-                  return (
-                    <ListGroup.Item key={i}>
-                      {killerStatLookup[stat.name]} : {stat.value}
-                    </ListGroup.Item>
-                  );
-                })}
-              </ListGroup>
+              <StatsList
+                statsList={killerStats as StatsEntity[]}
+                statsListLookup={killerStatLookup}
+              />
             </Col>
             <Col>
               <h4>Survivor Stats</h4>
-              <ListGroup variant="flush">
-                {survivorStats?.map((stat, i) => {
-                  return (
-                    <ListGroup.Item key={i}>
-                      {survivorStatLookup[stat.name]} : {stat.value}
-                    </ListGroup.Item>
-                  );
-                })}
-              </ListGroup>
+              <StatsList
+                statsList={survivorStats as StatsEntity[]}
+                statsListLookup={survivorStatLookup}
+              />
             </Col>
             <Col>
               <h4>Generic Stats</h4>
-              <ListGroup variant="flush">
-                {genericStats?.map((stat, i) => {
-                  return (
-                    <ListGroup.Item key={i}>
-                      {genericStatLookup[stat.name]} : {stat.value}
-                    </ListGroup.Item>
-                  );
-                })}
-              </ListGroup>
+              <StatsList
+                statsList={genericStats as StatsEntity[]}
+                statsListLookup={genericStatLookup}
+              />
               <h4>Unknown Stats</h4>
-              <ListGroup variant="flush">
-                {unknownStats?.map((stat, i) => {
-                  return (
-                    <ListGroup.Item key={i}>
-                      {stat.name} : {stat.value}
-                    </ListGroup.Item>
-                  );
-                })}
-              </ListGroup>
+              <StatsList statsList={unknownStats as StatsEntity[]} />
             </Col>
           </Row>
           <Row>
             <Col>
-              <ul>
-                Achievements:
-                {dbdStats.playerstats.achievements?.map((achievements, i) => {
-                  return (
-                    <li key={i}>
-                      {achievements.name}: {achievements.achieved}
-                    </li>
-                  );
-                })}
-              </ul>
+              Achievements:
+              {dbdStats.playerstats.achievements?.map((achievements, i) => {
+                return (
+                  <>
+                    <img
+                      src={"/images/achievements/" + achievements.name + ".jpg"}
+                      alt={achievements.name}
+                    />
+                    <p>{achievements.name}</p>
+                  </>
+                );
+              })}
             </Col>
           </Row>
         </>

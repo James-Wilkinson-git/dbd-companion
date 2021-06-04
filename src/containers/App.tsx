@@ -2,7 +2,7 @@
 import React, { FC } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Home } from "./Home/Home";
-import { PerksList } from "./Perks/PerksList";
+import { Perks } from "./Perks/Perks";
 import { Stats } from "./Stats/Stats";
 //Styles
 import "./App.scss";
@@ -15,7 +15,7 @@ export const App: FC = () => {
     <Router>
       <Switch>
         <Route path="/perks">
-          <PerksList />
+          <Perks />
         </Route>
         <Route path="/status">
           <StatusEffects />

@@ -1,6 +1,7 @@
 import React, { FC, useState } from "react";
 import { Modal } from "react-bootstrap";
-import "./PerkItem.scss";
+import "./Perk.scss";
+
 export const Perk: FC<{ thumb: string }> = ({ thumb }) => {
   const [show, setShow] = useState(false);
 

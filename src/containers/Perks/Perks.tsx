@@ -3,11 +3,11 @@ import React, { FC, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import { Perk } from "../../components/PerkItem/Perk";
+import { Perk } from "../../components/Perk/Perk";
 import { BackButton } from "../../components/BackBtn/BackButton";
 import { Collapse } from "react-bootstrap";
-import "./PerksList.scss";
-export const PerksList: FC = () => {
+import "./Perks.scss";
+export const Perks: FC = () => {
   const [openFilters, setFiltersOpen] = useState(false);
   const [openSearch, setSearchOpen] = useState(false);
   const perks = [
