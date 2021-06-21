@@ -1,7 +1,7 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import { Modal } from "react-bootstrap";
 import "./Perk.scss";
-import { IPerk, ICharacter } from "../../containers/Perks/Perks";
+import { IPerk } from "../../containers/Perks/Perks";
 
 export const Perk: FC<IPerk> = ({ name, description, icon, character }) => {
   const [show, setShow] = useState(false);

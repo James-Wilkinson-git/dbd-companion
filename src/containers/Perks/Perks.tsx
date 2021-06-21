@@ -1,5 +1,5 @@
 //JS Import
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -7,7 +7,7 @@ import { Perk } from "../../components/Perk/Perk";
 import { BackButton } from "../../components/BackBtn/BackButton";
 import { Collapse } from "react-bootstrap";
 import "./Perks.scss";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery, gql, useLazyQuery } from "@apollo/client";
 
 export interface ICharacter {
   id?: string;
@@ -24,6 +24,7 @@ export interface IPerk {
 export const Perks: FC = () => {
   const [openFilters, setFiltersOpen] = useState(false);
   const [openSearch, setSearchOpen] = useState(false);
+  const [perks, setPerks] = useState([] as IPerk[]);
   const PERKS = gql`
     query GetAllPerks {
       perks {
@@ -46,6 +47,19 @@ export const Perks: FC = () => {
       }
     }
   `;
+  const PERKS_BY_CHAR_ID = gql`
+    query GetPerksByCharacterID($characterId: ID!) {
+      perks(characterId: $characterId) {
+        name
+        description
+        icon
+        character {
+          name
+          role
+        }
+      }
+    }
+  `;
 
   const {
     loading: perksLoading,
@@ -57,6 +71,26 @@ export const Perks: FC = () => {
     error: charError,
     data: charData,
   } = useQuery(CHARACTERS);
+  const [
+    getCharacterPerks,
+    { loading: charPerksLoading, data: charPerksData },
+  ] = useLazyQuery(PERKS_BY_CHAR_ID);
+
+  const onChangeFilter = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    getCharacterPerks({ variables: { characterId: event.target.value } });
+  };
+
+  useEffect(() => {
+    if (perksData) {
+      setPerks(perksData.perks);
+    }
+  }, [perksData]);
+
+  useEffect(() => {
+    if (charPerksData) {
+      setPerks(charPerksData.perks);
+    }
+  }, [charPerksData]);
 
   return (
     <Container>
@@ -87,7 +121,11 @@ export const Perks: FC = () => {
         <Row>
           <Col xs={12} md={4}>
             <div>
-              <select name="Killers" id="killerSelect">
+              <select
+                name="Killers"
+                id="killerSelect"
+                onChange={onChangeFilter}
+              >
                 <option value="">Killers</option>
                 {!charLoading &&
                   !charError &&
@@ -95,20 +133,26 @@ export const Perks: FC = () => {
                     if (char.role === "Killer") {
                       return <option value={char.id}>{char.name}</option>;
                     }
+                    return null;
                   })}
               </select>
             </div>
           </Col>
           <Col xs={12} md={4}>
             <div>
-              <select name="Survivors" id="survivorSelect">
-                <option value="Dwight Fairfield">Survivors</option>
+              <select
+                name="Survivors"
+                id="survivorSelect"
+                onChange={onChangeFilter}
+              >
+                <option value="">Survivors</option>
                 {!charLoading &&
                   !charError &&
                   charData.characters.map((char: ICharacter) => {
                     if (char.role === "Survivor") {
                       return <option value={char.id}>{char.name}</option>;
                     }
+                    return null;
                   })}
               </select>
             </div>
@@ -132,7 +176,7 @@ export const Perks: FC = () => {
           {perksError && <p>Error</p>}
           {!perksLoading && !perksError && (
             <div className="perksContainer">
-              {perksData.perks.map((perk: IPerk) => {
+              {perks.map((perk: IPerk) => {
                 return <Perk {...perk} key={perk.name} />;
               })}
             </div>
