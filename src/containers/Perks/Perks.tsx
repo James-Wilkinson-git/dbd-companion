@@ -5,7 +5,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { Perk } from "../../components/Perk/Perk";
 import { BackButton } from "../../components/BackBtn/BackButton";
-import { Collapse } from "react-bootstrap";
+import { Button, Collapse } from "react-bootstrap";
 import "./Perks.scss";
 import { useQuery, gql, useLazyQuery } from "@apollo/client";
 
@@ -25,6 +25,7 @@ export const Perks: FC = () => {
   const [openFilters, setFiltersOpen] = useState(false);
   const [openSearch, setSearchOpen] = useState(false);
   const [perks, setPerks] = useState([] as IPerk[]);
+  const [searchValue, setSearchValue] = useState("");
   const PERKS = gql`
     query GetAllPerks {
       perks {
@@ -60,6 +61,19 @@ export const Perks: FC = () => {
       }
     }
   `;
+  const SEARCH_PERKS = gql`
+    query SearchPerks($query: String!) {
+      perks(query: $query) {
+        name
+        description
+        icon
+        character {
+          name
+          role
+        }
+      }
+    }
+  `;
 
   const {
     loading: perksLoading,
@@ -76,8 +90,18 @@ export const Perks: FC = () => {
     { loading: charPerksLoading, data: charPerksData },
   ] = useLazyQuery(PERKS_BY_CHAR_ID);
 
+  const [searchPerks, { loading: searchPerksLoading, data: searchPerksData }] =
+    useLazyQuery(SEARCH_PERKS);
+
   const onChangeFilter = (event: React.ChangeEvent<HTMLSelectElement>) => {
     getCharacterPerks({ variables: { characterId: event.target.value } });
+  };
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value);
+  };
+  const onSearch = () => {
+    searchPerks({ variables: { query: searchValue } });
   };
 
   useEffect(() => {
@@ -91,6 +115,12 @@ export const Perks: FC = () => {
       setPerks(charPerksData.perks);
     }
   }, [charPerksData]);
+
+  useEffect(() => {
+    if (searchPerksData) {
+      setPerks(searchPerksData.perks);
+    }
+  }, [searchPerksData]);
 
   return (
     <Container>
@@ -164,9 +194,14 @@ export const Perks: FC = () => {
           <input
             type="text"
             name="search"
-            placeholder="Perk Name"
-            className="perkSearch"
+            placeholder="Perk Name or Description"
+            value={searchValue}
+            className="perkSearch mr-1 float-left"
+            onChange={handleSearchChange}
           />
+          <Button variant="danger" onClick={onSearch}>
+            Search
+          </Button>
         </div>
       </Collapse>
       <Row>
