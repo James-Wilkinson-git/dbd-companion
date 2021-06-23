@@ -6,6 +6,7 @@ import SteamInstructions from "../../assets/steam-instructions.jpg";
 import { BackButton } from "../../components/BackBtn/BackButton";
 import "./Stats.scss";
 import { StatsList } from "../../components/StatsList/StatsList";
+import ProfileImage from "../../assets/publicprofile.jpg";
 export interface SteamApi {
   playerstats: Playerstats;
 }
@@ -345,12 +346,22 @@ export const Stats: FC = () => {
           <h2>Your DBD Steam Stats!</h2>
           <p>
             If you play DBD on steam we can pull a bunch of cool stats for you,
-            but first you are going to need your unique SteamID this is NOT any
-            of your display names or login names, in order to get your id open
-            steam and click on your user name in the top right and click account
-            details steam id should now be the second line under your username.
+            but first you are going to need a public profile and your unique
+            SteamID this is NOT any of your display names or login names, in
+            order to get your id open steam and click on your user name in the
+            top right and click account details steam id should now be the
+            second line under your username.
           </p>
           <p>
+            {" "}
+            Click View my Profile, then Edit Profile, then Privacy, and set your
+            Profile to public and Game Details to Public
+            <div className="scrollContainer">
+              <img src={ProfileImage} alt="Visual of above instructions" />
+            </div>
+          </p>
+          <p>
+            Then find your Steam ID and insert it below!
             <div className="scrollContainer">
               <img src={SteamInstructions} alt="Visual of above instructions" />
             </div>
@@ -375,6 +386,12 @@ export const Stats: FC = () => {
             Get My Stats <div id="chevron-arrow-right"></div>
           </button>
         </form>
+      </Row>
+      <Row>
+        <p>
+          Coming soon a browser source URL you can add to OBS for a stream
+          overlay of your stats!
+        </p>
       </Row>
       {dbdStats && (
         <>
