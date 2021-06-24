@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Secular+One&display=swap");
+.statContainer {
+  h1 {
+    background: url(../../assets//title-bg.jpg) center;
+    font-family: "Secular One", sans-serif;
+    padding: 0 10px;
+    font-size: 36px;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  li {
+    font-family: "Secular One", sans-serif;
+    font-size: 20px;
+  }
+  li img {
+    width: 75px;
+  }
+}

@@ -7,6 +7,7 @@ import { BackButton } from "../../components/BackBtn/BackButton";
 import "./Stats.scss";
 import { StatsList } from "../../components/StatsList/StatsList";
 import ProfileImage from "../../assets/publicprofile.jpg";
+import { Alert, Button, Collapse } from "react-bootstrap";
 export interface SteamApi {
   playerstats: Playerstats;
 }
@@ -166,8 +167,6 @@ export const Stats: FC = () => {
     DBD_SacrificedCampers: "Survivors sacrificed",
     DBD_TrapPickup: "Bear trap catches (trapper)",
     DBD_ChainsawHit: "Chainsaw hits (hillbilly)",
-    DBD_CamperMaxScoreByCategory:
-      "Survivor perfect games (5k+ in all categories)",
     DBD_SlasherMaxScoreByCategory:
       "Killer perfect games (5k+ in all categories)",
     DBD_UncloakAttack: "Uncloack attacks (wraith)",
@@ -219,8 +218,12 @@ export const Stats: FC = () => {
       "Total amount of points earned after maxing one category",
     DBD_UnlockRanking: "Ranked up",
     DBD_Event1_Stat3: "Mystery boxes opened in bloodwebs",
+    DBD_BloodwebMaxLevel: "Highest Leveled Character",
+    DBD_BloodwebPerkMaxLevel: "Number of Lv 50 Characters",
   };
   const survivorStatLookup: StatsLookup = {
+    DBD_CamperMaxScoreByCategory:
+      "Survivor perfect games (5k+ in all categories)",
     DBD_CamperSkulls: "Survivor rank (pips)",
     DBD_GeneratorPct_float: "Equivalent generators repaired",
     DBD_HealPct_float: "Equivalent survivors healed",
@@ -336,6 +339,9 @@ export const Stats: FC = () => {
     parseStatsData(data);
   };
 
+  const [profileOpen, setProfileOpen] = useState(false);
+  const [steamidOpen, setSteamidOpen] = useState(false);
+
   return (
     <Container>
       <Row>
@@ -347,25 +353,42 @@ export const Stats: FC = () => {
           <p>
             If you play DBD on steam we can pull a bunch of cool stats for you,
             but first you are going to need a public profile and your unique
-            SteamID this is NOT any of your display names or login names, in
-            order to get your id open steam and click on your user name in the
-            top right and click account details steam id should now be the
-            second line under your username.
+            SteamID.
+            <Button
+              variant="danger"
+              onClick={() => setProfileOpen(!profileOpen)}
+              className="mr-2"
+            >
+              How to Make Profile Public
+            </Button>
+            <Button
+              variant="danger"
+              onClick={() => setSteamidOpen(!steamidOpen)}
+            >
+              How to Get Steam Id
+            </Button>
           </p>
-          <p>
-            {" "}
-            Click View my Profile, then Edit Profile, then Privacy, and set your
-            Profile to public and Game Details to Public
-            <div className="scrollContainer">
-              <img src={ProfileImage} alt="Visual of above instructions" />
-            </div>
-          </p>
-          <p>
-            Then find your Steam ID and insert it below!
-            <div className="scrollContainer">
-              <img src={SteamInstructions} alt="Visual of above instructions" />
-            </div>
-          </p>
+          <Collapse in={profileOpen}>
+            <p>
+              {" "}
+              Click View my Profile, then Edit Profile, then Privacy, and set
+              your Profile to public and Game Details to Public
+              <div className="scrollContainer">
+                <img src={ProfileImage} alt="Visual of above instructions" />
+              </div>
+            </p>
+          </Collapse>
+          <Collapse in={steamidOpen}>
+            <p>
+              Then find your Steam ID and insert it below!
+              <div className="scrollContainer">
+                <img
+                  src={SteamInstructions}
+                  alt="Visual of above instructions"
+                />
+              </div>
+            </p>
+          </Collapse>
         </Col>
       </Row>
       <Row>
@@ -387,14 +410,30 @@ export const Stats: FC = () => {
           </button>
         </form>
       </Row>
-      <Row>
-        <p>
-          Coming soon a browser source URL you can add to OBS for a stream
-          overlay of your stats!
-        </p>
-      </Row>
       {dbdStats && (
         <>
+          <Row>
+            <Alert key="1" variant="dark">
+              <p>
+                Do you stream? You can now add the below urls as a browser
+                source to show stats on your stream! Click add browser source,
+                paste the url, set the size to 300x400px and leave the default
+                css to get rid of the background!
+              </p>
+              <p>
+                Killer Stats Overlay:{" "}
+                <pre>
+                  https://www.dbdcompanion.com/overlay/killer/{values.steamId}
+                </pre>
+              </p>
+              <p>
+                Survivor Stats Overlay:{" "}
+                <pre>
+                  https://www.dbdcompanion.com/overlay/survivor/{values.steamId}
+                </pre>
+              </p>
+            </Alert>
+          </Row>
           <Row>
             <Col>
               <h4>Killer Stats</h4>
@@ -418,22 +457,6 @@ export const Stats: FC = () => {
               />
               <h4>Unknown Stats</h4>
               <StatsList statsList={unknownStats as StatsEntity[]} />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              Achievements:
-              {dbdStats.playerstats.achievements?.map((achievements, i) => {
-                return (
-                  <>
-                    <img
-                      src={"/images/achievements/" + achievements.name + ".jpg"}
-                      alt={achievements.name}
-                    />
-                    <p>{achievements.name}</p>
-                  </>
-                );
-              })}
             </Col>
           </Row>
         </>

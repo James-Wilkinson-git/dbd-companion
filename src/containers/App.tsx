@@ -9,6 +9,7 @@ import "./App.scss";
 import Roulette from "./Roulette/Roulette";
 import Tutorials from "./Tutorials/Tutorials";
 import { StatusEffects } from "./Status/StatusEffects";
+import { StreamOverlay } from "./StreamOverlay/StreamOverlay";
 
 export const App: FC = () => {
   return (
@@ -28,6 +29,12 @@ export const App: FC = () => {
         </Route>
         <Route path="/stats">
           <Stats />
+        </Route>
+        <Route path="/overlay/killer/:steamid">
+          <StreamOverlay statsType="killer" />
+        </Route>
+        <Route path="/overlay/survivor/:steamid">
+          <StreamOverlay statsType="survivor" />
         </Route>
         <Route path="/">
           <Home />

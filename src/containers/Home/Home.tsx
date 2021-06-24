@@ -63,6 +63,34 @@ export const Home: FC = () => {
           </div>
         </Col>
       </Row>
+      <Row>
+        <Col>
+          <small>
+            Not affiliated with{" "}
+            <a href="https://www.bhvr.com/" target="_Blank">
+              Behaviour Interactive
+            </a>{" "}
+            or{" "}
+            <a href="https://deadbydaylight.com/en" target="_Blank">
+              Dead By Daylight Game
+            </a>
+            , images copyright respective owners and used under fair use for
+            educational purposes. You can contribute over on{" "}
+            <a href="https://github.com/jerw-git/dbd-companion" target="_Blank">
+              GitHub
+            </a>{" "}
+            and chat with me over on{" "}
+            <a href="https://twitter.com/jameserwilk" target="_Blank">
+              Twitter
+            </a>{" "}
+            or{" "}
+            <a href="https://www.twitch.tv/JAMESerwilk" target="_Blank">
+              Twitch
+            </a>
+            .
+          </small>
+        </Col>
+      </Row>
     </Container>
   );
 };

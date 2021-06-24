@@ -97,3 +97,9 @@ h5,
 h6 {
   font-weight: 900;
 }
+a {
+  color: red;
+  &:hover {
+    color: red;
+  }
+}
