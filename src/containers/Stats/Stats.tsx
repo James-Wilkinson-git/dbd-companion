@@ -423,13 +423,13 @@ export const Stats: FC = () => {
               <p>
                 Killer Stats Overlay:{" "}
                 <pre>
-                  https://www.dbdcompanion.com/overlay/killer/{values.steamId}
+                  https://dbdcompanion.com/overlay/killer/{values.steamId}
                 </pre>
               </p>
               <p>
                 Survivor Stats Overlay:{" "}
                 <pre>
-                  https://www.dbdcompanion.com/overlay/survivor/{values.steamId}
+                  https://dbdcompanion.com/overlay/survivor/{values.steamId}
                 </pre>
               </p>
             </Alert>
