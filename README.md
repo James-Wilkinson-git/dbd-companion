@@ -1,6 +1,8 @@
 # Dead By Daylight Companion App
 
-This is a pet project to learn React, React Hooks, and Graph QL, follow along on YouTube and Twitch!
+This was a pet project to learn the latest version of React with React Hooks, and Graph QL, follow along on [YouTube](https://www.youtube.com/channel/UClKvpSkVPg7hyVa9GoZtClw) to see my thought process in coding and checkout the below Miro board for all the planning I did for the app. There is also the GraphQL layer repo here.
+
+This project is hosted on Heroku Free Dynos with the node and express build package for this front-end layer. See the GraphQL repo for the other build packs.
 
 ## App Planning
 
