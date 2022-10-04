@@ -1,8 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Key } from "readline";
-import { StatsList } from "../../components/StatsList/StatsList";
-import { StatsEntity, StatsLookup, SteamApi } from "../Stats/Stats";
 import "./StreamOverlay.scss";
 import BasementHooks from "../../assets/iconHelp_basement.png";
 import Hooks from "../../assets/iconHelp_hookStruggle.png";
@@ -40,13 +37,13 @@ export const StreamOverlay: FC<{ statsType: string }> = ({ statsType }) => {
       const data = await response.json();
       let statsObj: any = {};
       data.playerstats.stats.map((stat: any) => {
-        statsObj[stat.name] = stat.value;
+        return (statsObj[stat.name] = stat.value);
       });
       console.log(statsObj);
       setDbdStats(statsObj);
     };
     fetchStats();
-  }, []);
+  });
 
   return (
     <>
