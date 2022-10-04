@@ -31,7 +31,7 @@ export const StreamOverlay: FC<{ statsType: string }> = ({ statsType }) => {
   useEffect(() => {
     const fetchStats = async () => {
       const response = await fetch(
-        `/v0002/?appid=381210&key=60CC7208B3EA2ABFA86557BBB788C2B8&steamid=${steamid}`
+        `/v0002/?appid=381210&key=0CF32996AC0E1B2C097D91AA8FD0158C&steamid=${steamid}`
       );
       if (!response.ok) {
         const message = `An error has occurred: ${response.status}`;
