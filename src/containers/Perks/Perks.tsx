@@ -161,7 +161,11 @@ export const Perks: FC = () => {
                   !charError &&
                   charData.characters.map((char: ICharacter) => {
                     if (char.role === "Killer") {
-                      return <option value={char.id}>{char.name}</option>;
+                      return (
+                        <option value={char.id} key={char.id}>
+                          {char.name}
+                        </option>
+                      );
                     }
                     return null;
                   })}
@@ -180,7 +184,11 @@ export const Perks: FC = () => {
                   !charError &&
                   charData.characters.map((char: ICharacter) => {
                     if (char.role === "Survivor") {
-                      return <option value={char.id}>{char.name}</option>;
+                      return (
+                        <option value={char.id} key={char.id}>
+                          {char.name}
+                        </option>
+                      );
                     }
                     return null;
                   })}
