@@ -78,14 +78,6 @@ export const Home: FC = () => {
             educational purposes. You can contribute over on{" "}
             <a href="https://github.com/jerw-git/dbd-companion" target="_Blank">
               GitHub
-            </a>{" "}
-            and chat with me over on{" "}
-            <a href="https://twitter.com/jameserwilk" target="_Blank">
-              Twitter
-            </a>{" "}
-            or{" "}
-            <a href="https://www.twitch.tv/JAMESerwilk" target="_Blank">
-              Twitch
             </a>
             .
           </small>

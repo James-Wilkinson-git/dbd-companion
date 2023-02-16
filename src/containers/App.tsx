@@ -1,6 +1,6 @@
 //JS Import
 import React, { FC } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Home } from "./Home/Home";
 import { Perks } from "./Perks/Perks";
 import { Stats } from "./Stats/Stats";
@@ -13,33 +13,23 @@ import { StreamOverlay } from "./StreamOverlay/StreamOverlay";
 
 export const App: FC = () => {
   return (
-    <Router>
-      <Switch>
-        <Route path="/perks">
-          <Perks />
-        </Route>
-        <Route path="/status">
-          <StatusEffects />
-        </Route>
-        <Route path="/roulette">
-          <Roulette />
-        </Route>
-        <Route path="/tutorials">
-          <Tutorials />
-        </Route>
-        <Route path="/stats">
-          <Stats />
-        </Route>
-        <Route path="/overlay/killer/:steamid">
-          <StreamOverlay statsType="killer" />
-        </Route>
-        <Route path="/overlay/survivor/:steamid">
-          <StreamOverlay statsType="survivor" />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
-      </Switch>
-    </Router>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/perks" element={<Perks />} />
+        <Route path="/status" element={<StatusEffects />} />
+        <Route path="/roulette" element={<Roulette />} />
+        <Route path="/tutorials" element={<Tutorials />} />
+        <Route path="/stats" element={<Stats />} />
+        <Route
+          path="/overlay/killer/:steamid"
+          element={<StreamOverlay statsType="killer" />}
+        />
+        <Route
+          path="/overlay/survivor/:steamid"
+          element={<StreamOverlay statsType="survivor" />}
+        />
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
   );
 };

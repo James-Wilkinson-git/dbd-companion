@@ -20,7 +20,7 @@ interface IStats {
 }
 export const StreamOverlay: FC<{ statsType: string }> = ({ statsType }) => {
   //State
-  let { steamid } = useParams<urlParams>();
+  let { steamid } = useParams();
   const [dbdStats, setDbdStats] = useState<IStats>();
   const killer = statsType === "killer";
   const survivor = statsType === "survivor";
