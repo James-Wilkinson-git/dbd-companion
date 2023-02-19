@@ -13,6 +13,7 @@
     "react-router-dom": "^6.8.1",
     "react-scripts": "^5.0.1",
     "sass": "^1.58.1",
+    "testing-library": "^0.0.2",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
@@ -40,6 +41,7 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@types/babel__core": "^7.20.0",
     "@types/babel__generator": "^7.6.4",

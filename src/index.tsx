@@ -14,7 +14,7 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <App />
+      <App data-testid="app-root" />
     </ApolloProvider>
   </React.StrictMode>
 );

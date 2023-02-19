@@ -123,10 +123,10 @@ export const Perks: FC = () => {
   }, [searchPerksData]);
 
   return (
-    <Container>
+    <Container data-testid="perks-component">
       <Row>
         <BackButton />
-        <div className="filtersBtn">
+        <div className="filtersBtn" data-testid="filters-toggle">
           <button
             className="filtersBtn"
             onClick={() => setFiltersOpen(!openFilters)}
@@ -136,7 +136,7 @@ export const Perks: FC = () => {
             Filters
           </button>
         </div>
-        <div className="filtersBtn">
+        <div className="filtersBtn" data-testid="search-toggle">
           <button
             className="filtersBtn"
             onClick={() => setSearchOpen(!openSearch)}
@@ -155,6 +155,7 @@ export const Perks: FC = () => {
                 name="Killers"
                 id="killerSelect"
                 onChange={onChangeFilter}
+                data-testid="killers-dropdown"
               >
                 <option value="">Killers</option>
                 {!charLoading &&
@@ -178,6 +179,7 @@ export const Perks: FC = () => {
                 name="Survivors"
                 id="survivorSelect"
                 onChange={onChangeFilter}
+                data-testid="survivors-dropdown"
               >
                 <option value="">Survivors</option>
                 {!charLoading &&

@@ -12,7 +12,7 @@ import statsIcon from "../../assets/stats-icon.png";
 import statusIcon from "../../assets/status_effects.png";
 export const Home: FC = () => {
   return (
-    <Container>
+    <Container data-testid="Home">
       <Row>
         <div className="header">
           <Link to="/">
