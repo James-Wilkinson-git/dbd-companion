@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000/api",
+  uri: "https://dbd-companion-graphql.onrender.com/api",
   cache: new InMemoryCache(),
 });
 const container = document.getElementById("root");
@@ -14,7 +14,7 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <App data-testid="app-root" />
+      <App />
     </ApolloProvider>
   </React.StrictMode>
 );
