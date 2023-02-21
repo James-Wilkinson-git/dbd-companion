@@ -33,5 +33,4 @@ test("Filter Button Renders dropdowns on click", async () => {
   const killersDropdown = await screen.findByTestId("killers-dropdown");
   const survivorsDropdown = await screen.findByTestId("survivors-dropdown");
   //Assert
-  expect(fireEvent.click(filtersToggle)).toBeTruthy;
 });
