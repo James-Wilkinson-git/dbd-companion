@@ -210,7 +210,7 @@ export const Stats: FC = () => {
 
   const fetchStats = async (steamId: string) => {
     const response = await fetch(
-      `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=381210&key=0CF32996AC0E1B2C097D91AA8FD0158C&steamid=${steamId}`
+      `https://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=381210&key=0CF32996AC0E1B2C097D91AA8FD0158C&steamid=${steamId}`
     );
     if (!response.ok) {
       const message = `An error has occurred: ${response.status}`;

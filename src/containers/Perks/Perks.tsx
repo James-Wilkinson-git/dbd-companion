@@ -126,28 +126,30 @@ export const Perks: FC = () => {
     <Container data-testid="perks-component">
       <Row>
         <BackButton />
-        <div className="filtersBtn" data-testid="filters-toggle">
+        <div className="filtersBtn">
           <button
             className="filtersBtn"
             onClick={() => setFiltersOpen(!openFilters)}
             aria-controls="Filters Closed"
             aria-expanded={openFilters}
+            data-testid="filters-button"
           >
             Filters
           </button>
         </div>
-        <div className="filtersBtn" data-testid="search-toggle">
+        <div className="filtersBtn">
           <button
             className="filtersBtn"
             onClick={() => setSearchOpen(!openSearch)}
             aria-controls="Search Closed"
             aria-expanded={openSearch}
+            data-testid="search-button"
           >
             Search
           </button>
         </div>
       </Row>
-      <Collapse in={openFilters} className="mb-3">
+      <Collapse in={openFilters} className="mb-3" data-testid="filters-row">
         <Row>
           <Col xs={12} md={4}>
             <div>
@@ -199,7 +201,7 @@ export const Perks: FC = () => {
           </Col>
         </Row>
       </Collapse>
-      <Collapse in={openSearch} className="mb-3">
+      <Collapse in={openSearch} className="mb-3" data-testid="search-row">
         <div id="Search-Open">
           <input
             type="text"
@@ -208,6 +210,7 @@ export const Perks: FC = () => {
             value={searchValue}
             className="perkSearch mr-1 float-left"
             onChange={handleSearchChange}
+            data-testid="search-box"
           />
           <Button variant="danger" onClick={onSearch}>
             Search
