@@ -10,21 +10,24 @@ import "./Perks.scss";
 import { useQuery, gql, useLazyQuery } from "@apollo/client";
 
 export interface ICharacter {
-  id?: string;
-  name?: string;
-  role?: string;
+  id: string;
+  name: string;
+  role: "killer" | "survivor";
 }
 export interface IPerk {
-  name?: string;
-  description?: string;
-  icon?: string;
-  character?: ICharacter;
+  name: string;
+  description: string;
+  icon: string;
+  character: ICharacter;
+  keywords?: string;
 }
 
 export const Perks: FC = () => {
+  //Object State
+  const [perks, setPerks] = useState<IPerk[]>(undefined);
+  //UI State
   const [openFilters, setFiltersOpen] = useState(false);
   const [openSearch, setSearchOpen] = useState(false);
-  const [perks, setPerks] = useState([] as IPerk[]);
   const [searchValue, setSearchValue] = useState("");
   const PERKS = gql`
     query GetAllPerks {
@@ -71,6 +74,7 @@ export const Perks: FC = () => {
           name
           role
         }
+        keywords
       }
     }
   `;
