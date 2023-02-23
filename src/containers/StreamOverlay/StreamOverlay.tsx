@@ -19,6 +19,7 @@ type IURLParams = {
 
 //Because we are describing what the data looks like we can use an interface
 interface IStats {
+  //because we are using the data to make another object set to readonly to not accidentally change the original data
   readonly [key: string]: string;
 }
 

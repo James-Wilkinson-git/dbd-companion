@@ -8,9 +8,12 @@ import "./Stats.scss";
 import { StatsList } from "../../components/StatsList/StatsList";
 import ProfileImage from "../../assets/publicprofile.jpg";
 import { Alert, Button, Collapse } from "react-bootstrap";
+
+//Because this is data from an api set to readonly so we don't overwrite it by accident
 export interface SteamApi {
-  playerstats: Playerstats;
+  readonly playerstats: Playerstats;
 }
+//Describe the object returned by the SteamAPI, because some options can be null make them optional
 export interface Playerstats {
   steamID: string;
   gameName: string;
@@ -26,8 +29,9 @@ export interface AchievementsEntity {
   achieved: number;
 }
 
+//Because the API isn't in our control it can change at anytime so support that with a generic interface
 export interface StatsLookup {
-  [key: string]: String;
+  [key: string]: string;
 }
 
 export const Stats: FC = () => {
@@ -35,6 +39,7 @@ export const Stats: FC = () => {
   const initialValues = { steamId: "" };
   const [values, setValues] = useState(initialValues);
   const [dbdStats, setDbdStats] = useState<SteamApi>();
+  //Set our state to an array of our StatsEntity interface
   const [survivorStats, setSurvivorStats] = useState<StatsEntity[]>();
   const [killerStats, setKillerStats] = useState<StatsEntity[]>();
   const [genericStats, setGenericStats] = useState<StatsEntity[]>();
