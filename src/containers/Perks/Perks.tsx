@@ -10,16 +10,16 @@ import "./Perks.scss";
 import { useQuery, gql, useLazyQuery } from "@apollo/client";
 
 export interface ICharacter {
-  id: string;
-  name: string;
-  role: "killer" | "survivor";
+  readonly id: string;
+  readonly name: string;
+  readonly role: "killer" | "survivor";
 }
 export interface IPerk {
-  name: string;
-  description: string;
-  icon: string;
-  character: ICharacter;
-  keywords?: string;
+  readonly name: string;
+  readonly description: string;
+  readonly icon: string;
+  readonly character: ICharacter;
+  readonly keywords?: string;
 }
 
 export const Perks: FC = () => {
@@ -74,7 +74,6 @@ export const Perks: FC = () => {
           name
           role
         }
-        keywords
       }
     }
   `;
