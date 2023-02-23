@@ -12,15 +12,19 @@ import Totems from "../../assets/iconHelp_totems.png";
 import Generator from "../../assets/iconHelp_generators.png";
 import Medkit from "../../assets/iconItems_medkit.png";
 
-interface urlParams {
+//Because useParams() returns a generic Type we have to use a type instead of an interface
+type IURLParams = {
   steamid: string;
-}
+};
+
+//Because we are describing what the data looks like we can use an interface
 interface IStats {
-  [key: string]: string;
+  readonly [key: string]: string;
 }
+
 export const StreamOverlay: FC<{ statsType: string }> = ({ statsType }) => {
   //State
-  let { steamid } = useParams();
+  let { steamid } = useParams<IURLParams>();
   const [dbdStats, setDbdStats] = useState<IStats>();
   const killer = statsType === "killer";
   const survivor = statsType === "survivor";
@@ -28,18 +32,17 @@ export const StreamOverlay: FC<{ statsType: string }> = ({ statsType }) => {
   useEffect(() => {
     const fetchStats = async () => {
       const response = await fetch(
-        `/v0002/?appid=381210&key=0CF32996AC0E1B2C097D91AA8FD0158C&steamid=${steamid}`
+        `https://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=381210&key=0CF32996AC0E1B2C097D91AA8FD0158C&steamid=${steamid}`
       );
       if (!response.ok) {
         const message = `An error has occurred: ${response.status}`;
         throw new Error(message);
       }
       const data = await response.json();
-      let statsObj: any = {};
-      data.playerstats.stats.map((stat: any) => {
+      let statsObj = {};
+      data.playerstats.stats.map((stat: IStats) => {
         return (statsObj[stat.name] = stat.value);
       });
-      console.log(statsObj);
       setDbdStats(statsObj);
     };
     fetchStats();
