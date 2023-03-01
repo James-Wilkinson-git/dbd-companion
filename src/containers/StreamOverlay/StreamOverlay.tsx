@@ -12,17 +12,6 @@ import Totems from "../../assets/iconHelp_totems.png";
 import Generator from "../../assets/iconHelp_generators.png";
 import Medkit from "../../assets/iconItems_medkit.png";
 
-//Because useParams() returns a generic Type we have to use a type instead of an interface
-type IURLParams = {
-  steamid: string;
-};
-
-//Because we are describing what the data looks like we can use an interface
-interface IStats {
-  //because we are using the data to make another object set to readonly to not accidentally change the original data
-  readonly [key: string]: string;
-}
-
 export const StreamOverlay: FC<{ statsType: string }> = ({ statsType }) => {
   //State
   let { steamid } = useParams<IURLParams>();

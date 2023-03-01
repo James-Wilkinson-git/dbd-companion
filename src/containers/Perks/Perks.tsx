@@ -15,19 +15,6 @@ import {
   SEARCH_PERKS,
 } from "./GraphQLQueries";
 
-export interface ICharacter {
-  readonly id: string;
-  readonly name: string;
-  readonly role: "Killer" | "Survivor";
-}
-export interface IPerk {
-  readonly name: string;
-  readonly description: string;
-  readonly icon: string;
-  readonly character: ICharacter;
-  readonly keywords?: string;
-}
-
 export const Perks: FC = () => {
   //Object State
   const [perks, setPerks] = useState<IPerk[]>(undefined);

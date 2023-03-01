@@ -1,5 +1,3 @@
-import { StatsLookup } from "./Stats";
-
 export const killerStatLookup: StatsLookup = {
   DBD_KillerSkulls: "Killer rank (pips)",
   DBD_KilledCampers:
