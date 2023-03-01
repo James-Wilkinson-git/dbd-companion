@@ -12,7 +12,7 @@ import { useQuery, gql, useLazyQuery } from "@apollo/client";
 export interface ICharacter {
   readonly id: string;
   readonly name: string;
-  readonly role: "killer" | "survivor";
+  readonly role: "Killer" | "Survivor";
 }
 export interface IPerk {
   readonly name: string;
