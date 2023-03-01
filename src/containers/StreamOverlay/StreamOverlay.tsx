@@ -22,7 +22,7 @@ export const StreamOverlay: FC<{ statsType: string }> = ({ statsType }) => {
   useEffect(() => {
     const fetchStats = async () => {
       const response = await fetch(
-        `https://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=381210&key=0CF32996AC0E1B2C097D91AA8FD0158C&steamid=${steamid}`
+        `https://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=381210&key=D94425951AA703DCF1904F014AB6DAC4&steamid=${steamid}`
       );
       if (!response.ok) {
         const message = `An error has occurred: ${response.status}`;

@@ -69,7 +69,8 @@ export const Perks: FC = () => {
       setPerks(searchPerksData.perks);
     }
   }, [searchPerksData]);
-  const loadingData = perksLoading || charPerksLoading || searchPerksLoading;
+  const loadingData: boolean =
+    perksLoading || charPerksLoading || searchPerksLoading;
 
   return (
     <Container data-testid="perks-component">
