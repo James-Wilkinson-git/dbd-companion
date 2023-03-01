@@ -7,7 +7,13 @@ import { Perk } from "../../components/Perk/Perk";
 import { BackButton } from "../../components/BackBtn/BackButton";
 import { Button, Collapse } from "react-bootstrap";
 import "./Perks.scss";
-import { useQuery, gql, useLazyQuery } from "@apollo/client";
+import { useQuery, useLazyQuery } from "@apollo/client";
+import {
+  CHARACTERS,
+  PERKS,
+  PERKS_BY_CHAR_ID,
+  SEARCH_PERKS,
+} from "./GraphQLQueries";
 
 export interface ICharacter {
   readonly id: string;
@@ -29,54 +35,6 @@ export const Perks: FC = () => {
   const [openFilters, setFiltersOpen] = useState(false);
   const [openSearch, setSearchOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const PERKS = gql`
-    query GetAllPerks {
-      perks {
-        name
-        description
-        icon
-        character {
-          name
-          role
-        }
-      }
-    }
-  `;
-  const CHARACTERS = gql`
-    query GetAllCharacters {
-      characters {
-        id
-        name
-        role
-      }
-    }
-  `;
-  const PERKS_BY_CHAR_ID = gql`
-    query GetPerksByCharacterID($characterId: ID!) {
-      perks(characterId: $characterId) {
-        name
-        description
-        icon
-        character {
-          name
-          role
-        }
-      }
-    }
-  `;
-  const SEARCH_PERKS = gql`
-    query SearchPerks($query: String!) {
-      perks(query: $query) {
-        name
-        description
-        icon
-        character {
-          name
-          role
-        }
-      }
-    }
-  `;
 
   const {
     loading: perksLoading,
