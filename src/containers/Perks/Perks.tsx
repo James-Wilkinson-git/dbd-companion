@@ -15,19 +15,6 @@ import {
   SEARCH_PERKS,
 } from "./GraphQLQueries";
 
-export interface ICharacter {
-  readonly id: string;
-  readonly name: string;
-  readonly role: "Killer" | "Survivor";
-}
-export interface IPerk {
-  readonly name: string;
-  readonly description: string;
-  readonly icon: string;
-  readonly character: ICharacter;
-  readonly keywords?: string;
-}
-
 export const Perks: FC = () => {
   //Object State
   const [perks, setPerks] = useState<IPerk[]>(undefined);
@@ -82,6 +69,7 @@ export const Perks: FC = () => {
       setPerks(searchPerksData.perks);
     }
   }, [searchPerksData]);
+  const loadingData = perksLoading || charPerksLoading || searchPerksLoading;
 
   return (
     <Container data-testid="perks-component">
@@ -181,11 +169,11 @@ export const Perks: FC = () => {
       <Row>
         <Col>
           <h2>Perks List</h2>
-          {perksLoading && <p>Loading...</p>}
+          {loadingData && <p>Loading...</p>}
           {perksError && <p>Error</p>}
           {!perksLoading && !perksError && (
             <div className="perksContainer">
-              {perks.map((perk: IPerk) => {
+              {perks?.map((perk: IPerk) => {
                 return <Perk {...perk} key={perk.name} />;
               })}
             </div>

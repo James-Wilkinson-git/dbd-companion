@@ -14,31 +14,6 @@ import {
   survivorStatLookup,
 } from "./statsDictionary";
 
-//Because this is data from an api set to readonly so we don't overwrite it by accident
-export interface SteamApi {
-  readonly playerstats: Playerstats;
-}
-//Describe the object returned by the SteamAPI, because some options can be null make them optional
-export interface Playerstats {
-  steamID: string;
-  gameName: string;
-  stats?: StatsEntity[] | null;
-  achievements?: AchievementsEntity[] | null;
-}
-export interface StatsEntity {
-  name: string;
-  value: number;
-}
-export interface AchievementsEntity {
-  name: string;
-  achieved: number;
-}
-
-//Because the API isn't in our control it can change at anytime so support that with a generic interface
-export interface StatsLookup {
-  [key: string]: string;
-}
-
 export const Stats: FC = () => {
   //State
   const initialValues = { steamId: "" };

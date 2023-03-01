@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import { ListGroup } from "react-bootstrap";
-import { StatsEntity, StatsLookup } from "../../containers/Stats/Stats";
 
 export const StatsList: FC<{
   statsList: StatsEntity[];
